@@ -16,17 +16,15 @@ import java.util.List;
  */
 public class SortUser {
 	
-	private String filepath = "/Users/payamdowlatyari/Caltech/Assignments/src/project1/users.txt";
-	public String order; 
 	public List<String> users;
 	String user = null;
 	
-	SortUser(String order){
+	SortUser(){
 		
-		this.order = order;
 		this.users = new ArrayList<String>(); 
+		FilePath fp = new FilePath("users.txt");
 		
-		File f1 = new File(this.filepath);
+		File f1 = new File(fp.getFilename());
         FileReader fr;
         
 		try {
@@ -44,24 +42,14 @@ public class SortUser {
 			e.printStackTrace();
 		}
        
-		if (this.order == "d") 
-			this.descending();
-		
-		else
-			this.ascending();	
+			this.ascendingSort();	
 	}
 	
-	void ascending() {
+	void ascendingSort() {
 		
 		Collections.sort(this.users);  
 		Message msg = new Message();
 		msg.displayUsers(this.users);		
 	}
 	
-	void descending() {
-		
-		Collections.sort(this.users, Collections.reverseOrder());  
-		Message msg = new Message();
-		msg.displayUsers(this.users);
-	}		
 }

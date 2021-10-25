@@ -1,25 +1,21 @@
+// Author: Payam Dowlatyari 
 package project1;
-import java.util.*;
-
+/**
+ * @author payamdowlatyari
+ *
+ */
 public class Main {	
-
+	
+	// the main method creates an instance of Welcome and mainMenu objects 
+	// prints the welcome messages and displays the main menu
 	public static void main(String[] args) {
-		
-		Scanner input = new Scanner(System.in);
-		
+				
 		Welcome welcome = new Welcome();
 		welcome.printWelcome();
 		
 		Menu mainMenu = new Menu();
 		mainMenu.displayMenu();
 		
-		do {			
-			String select = input.nextLine();
-			mainMenu.selectItem(select);
-			
-		} while (!mainMenu.exited());
-		
-		input.close();
 	}
 
 }

@@ -2,7 +2,6 @@
  * Author: Payam Dowlatyari 
  */
 package project1;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,24 +11,24 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * @author payamdowlatyari
  *
  */
 public class WriteToFile {
 	
-	private String filepath = "/Users/payamdowlatyari/Caltech/Assignments/src/project1/users.txt";
 	List<String> lines = new ArrayList<String>();
     String line = null;
 	
-	
+
 	void editUsername(String username, String newUsername) {
 		
 		
 		try {
 			
-			File f1 = new File(this.filepath);
+			FilePath fp = new FilePath("users.txt");
+			
+			File f1 = new File(fp.getFilename());
 	        FileReader fr = new FileReader(f1);
 	        BufferedReader br = new BufferedReader(fr);
 	        while ((line = br.readLine()) != null) {
@@ -58,7 +57,8 @@ public class WriteToFile {
 	void deleteUsername(String username) {
 		try {
 			
-			File f1 = new File(this.filepath);
+			FilePath fp = new FilePath("users.txt");
+			File f1 = new File(fp.getFilename());
 	        FileReader fr = new FileReader(f1);
 	        BufferedReader br = new BufferedReader(fr);
 	        while ((line = br.readLine()) != null) {
@@ -88,8 +88,11 @@ public class WriteToFile {
 	
 	void appendUsername(String username) {
 		
+		FilePath fp = new FilePath("users.txt");
+		
 			try(
-		            FileWriter fw = new FileWriter(this.filepath, true);
+					
+		            FileWriter fw = new FileWriter(fp.getFilename(), true);
 		            BufferedWriter bw = new BufferedWriter(fw);
 		            PrintWriter out = new PrintWriter(bw)
 		       )

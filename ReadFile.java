@@ -2,35 +2,30 @@
  * Author: Payam Dowlatyari 
  */
 package project1;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 /**
  * @author payamdowlatyari
  *
  */
+// read name of the files in a given directory
 public class ReadFile {
 	
-	private String filepath = "/Users/payamdowlatyari/Caltech/Assignments/src/project1/users.txt";
-	
-	ReadFile() {
+	 // creates a new File instance by converting the given path into an abstract path
+	 // populates the array with names of files and print the names of files 
+	public void listFiles() {
 		
-		 File file = new File(this.filepath);
-		 
-		 try {
-			 
-			BufferedReader br = new BufferedReader(new FileReader(file));			
-			String st;
-			
-			while ((st = br.readLine()) != null)		            
-		            System.out.println(st); // Print the string
-			 
-			 br.close();
-			 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	  }
+		String[] filenames;
+       
+		FilePath fp = new FilePath();
+        File f = new File(fp.getFilePath());
+       
+        filenames = f.list();
+
+        for (String filename : filenames) {
+       
+        	if (!filename.equals(".DS_Store"))
+            System.out.println(filename);
+        }
+	}
+		
 }

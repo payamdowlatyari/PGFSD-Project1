@@ -2,9 +2,7 @@
  * Author: Payam Dowlatyari 
  */
 package project1;
-
 import java.util.List;
-
 /**
  * @author payamdowlatyari
  *
@@ -39,10 +37,10 @@ public class Message {
 	public void displayMessageSearch(String word, boolean found) {
 		
 		if (found) {
-			System.out.println(word + "Exists!");
+			System.out.println(word + " Exists!");
 		}
 		else {
-			System.out.println(word + "does not exist!");
+			System.out.println(word + " does not exist!");
 		}
 		
 	}

@@ -7,111 +7,128 @@ import java.util.*;
  * @author payamdowlatyari
  *
  */
+// this class handles all menu and sub menu options 
 public class Menu {
 	
-	ArrayList <String> menuItems;
-	private boolean validSelection = true;
-	private boolean exit = false;
+	ArrayList <String> menuItems; // contains main menu
+	ArrayList <String> options; // contains more options or sub menu
 	
+	private boolean exit;
+	
+	// constructor instantiates menu and sub menu items 
 	Menu(){	
 		
-		this.menuItems = new ArrayList<String>();
+		this.menuItems = new ArrayList<String>();		
+		this.menuItems.add("(1) Display files ");
+		this.menuItems.add("(2) More Options ");
+		this.menuItems.add("(exit) Exit the program ");
 		
-		this.menuItems.add("1. Display users");
-		this.menuItems.add("2. Add a user");
-		this.menuItems.add("3. Edit a user");
-		this.menuItems.add("4. Delete a user");
-		this.menuItems.add("5. Sort users");
-		this.menuItems.add("6. Search for a user");
-		this.menuItems.add("7. Exit");
+		this.options = new ArrayList<String>();
+		this.options.add("(3) Add a new file ");
+		this.options.add("(4) Delete a user file ");
+		this.options.add("(5) Search a user file ");
+		this.options.add("(0) Main Menu ");
+		this.options.add("(exit) Exit the program ");
+		
+		this.exit = false;
 	}
 	
+	// this method gets input from the console and uses a while loop to display the menu
 	void displayMenu() {
+		
+		Scanner input = new Scanner(System.in);
+		
+		while(!this.exited()) {
 
+		System.out.println("**********************************************\n");	
 		this.menuItems.forEach((n) -> System.out.println(n));
-		System.out.println(" \nPlease choose a number from the list");
+		System.out.println(" \nChoose from the menu\n");
+		System.out.println("**********************************************\n");
+		this.selectItem(input.nextLine());
+
+		}
+		
+		if (this.exited())
+			input.close();
+		
 	}
 	
+	// displays the sub menu using function overloading 
+	void displayMenu(ArrayList<String> menu) {
+
+		System.out.println("**********************************************\n");
+		menu.forEach((n) -> System.out.println(n));
+		System.out.println(" \nChoose an options\n");
+		System.out.println("**********************************************\n");
+	}
+	
+	// uses a switch statement to handle users selection 
 	void selectItem(String item) {
 		
 		Scanner input = new Scanner(System.in);
-		Message msg = new Message();
 		
 		switch(item) {
 		
 		case "1": {
 			
-			validSelection = true;
-			System.out.println("List of the users:\n");
-			new ReadFile();	
+			new SortFiles();
 		}
 			break;
 		case "2": {
 			
-			validSelection = true;
-			System.out.println("Enter username");
-			String username = input.nextLine();
-			WriteToFile wtf = new WriteToFile();
-			wtf.appendUsername(username);			
+			this.displayMenu(options);
+			String option = input.nextLine();
+			this.selectItem(option);
 		}
 			break;
+
 		case "3": {
 			
-			validSelection = true;
-			System.out.println("Enter username");
-			String username = input.nextLine();
-			System.out.println("Enter new username");
-			String newUsername = input.nextLine();
-			WriteToFile wtf = new WriteToFile();
-			wtf.editUsername(username, newUsername);
+			System.out.println("Enter new file name");
+			String filename = input.nextLine();
+			new CreateFile(filename);
+
 		}
 			break;
 		case "4": {
-			
-			validSelection = true;
-			System.out.println("Enter username");
-			String username = input.nextLine();
-			WriteToFile wtf = new WriteToFile();
-			wtf.deleteUsername(username);
+					
+			System.out.println("Enter file name");
+			String filename = input.nextLine();
+			new DeleteFile(filename); 
+				
 		}
 			break;
 		case "5": {
 			
-			validSelection = true;
-			System.out.println("Ascending or Descending sort? (a/d) ");
-			String order = input.nextLine();
-			new SortUser(order);		
+			System.out.println("Enter file to search");
+			String filename = input.nextLine();
+			new SearchFile(filename);
 		}
 			break;
-		case "6": {
+		case "0": {
 			
-			validSelection = true;
-			System.out.println("Enter username");
-			String username = input.nextLine();
-			SearchUser srch = new SearchUser();
-			msg.displayMessageSearch(username, srch.searchUsername(username));		
+			this.displayMenu();
 		}
 			break;
-		case "7": {
-			System.out.println("Goodbye!");
-			validSelection = true;
+		case "exit": {
+			
+			System.out.println("You have exited. Goodbye!\n");
 			exit = true;
 			input.close();
 		}
-			break;
+			break;	
 		default: {
-			System.out.println( "Try again!");
-			validSelection = false;
+			
+			System.out.println( "Try again!\n");
+			this.displayMenu();
 		}
 			break;
+		
 		}
 
 	}
 	
-	public boolean selected () {
-		return this.validSelection;
-	}
-	
+	// exits the program
 	public boolean exited () {
 		return this.exit;
 	}

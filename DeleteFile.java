@@ -2,21 +2,23 @@
  * Author: Payam Dowlatyari 
  */
 package project1;
-
 import java.io.File;
-
 /**
  * @author payamdowlatyari
  *
  */
-public class DeleteFile {
-	
-	private String filePath = "/Users/payamdowlatyari/Caltech/Assignments/src/project1/";
-	
+// child of FileOptions that deletes a file
+public class DeleteFile extends FileOptions{
+		
+	private String filename;
+		
 	DeleteFile(String filename){
 		
+		super(filename);
+		this.filename = filename;
+		FilePath fp = new FilePath();
 		
-		File myObj = new File(this.filePath + filename); 
+		File myObj = new File(fp.getFilePath() + this.filename); 
 	    if (myObj.delete()) { 
 	      System.out.println("Deleted the file: " + myObj.getName());
 	    } else {
